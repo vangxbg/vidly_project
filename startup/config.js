@@ -1,4 +1,4 @@
-// this code makes sure there is a jwtPrivateKey for generating a token
+/*** this code makes sure there is a jwtPrivateKey for generating a token ***/
 
 // loading the required modules
 const config = require('config');

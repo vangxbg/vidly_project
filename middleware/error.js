@@ -1,4 +1,4 @@
-// this document handles all the caught errors but only requests processing pipeline from express
+/*** this code handles all the caught errors but only for the requests processing pipeline from express ***/
 
 // loading the required modules
 const winston = require('winston');

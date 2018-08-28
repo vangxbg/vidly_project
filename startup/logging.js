@@ -1,4 +1,4 @@
-// this document uses winston module to handle the errors
+/*** this code uses winston module and express-async-errors to setup error logging. Also the handling of uncaught errors and exceptions ***/
 
 // loading the required modules
 const winston = require('winston'); // for error logging in general
@@ -9,8 +9,8 @@ require('express-async-errors'); // special module, puts express CRUD operations
 module.exports = function() {
   // handles exceptions from outside of express that has not been handled
   winston.handleExceptions(
-    new winston.transports.Console({ colorize: true, prettyPrint: true }), //this is a different logger on console to help new users see these errors and exceptions
-    new winston.transports.File({ filename: 'uncaughtExceptions.log' // this is different from the default logger so call new
+    new winston.transports.Console({ colorize: true, prettyPrint: true }), // logs onto console
+    new winston.transports.File({ filename: 'uncaughtExceptions.log' // logs onto uncaughtExceptions (not the default logfile)
   })); 
   // handles rejection from promises that were that has not been handled
   process.on('unhandledRejection', (ex) => {
