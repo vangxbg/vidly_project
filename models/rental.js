@@ -1,9 +1,14 @@
+/*** This code defines the schema for a rental */
+
+// loading the required modules here
 const Joi = require('joi');
 const mongoose = require('mongoose');
 const moment = require('moment');
 
+// instantiating a schema for the rental module
 const rentalSchema = new mongoose.Schema({
   customer: { 
+    // using a new schema, not a reference to another schema.  this is faster than referencing a schema
     type: new mongoose.Schema({
       name: {
         type: String,
@@ -56,6 +61,7 @@ const rentalSchema = new mongoose.Schema({
   }
 });
 
+// creates a static method lookup to look up the rental
 rentalSchema.statics.lookup = function(customerId, movieId) {
   return this.findOne({
     'customer._id': customerId,
@@ -63,6 +69,7 @@ rentalSchema.statics.lookup = function(customerId, movieId) {
   });
 }
 
+// creates a non static method that sets the return date and the rentalFee
 rentalSchema.methods.return = function() {
   this.dateReturned = new Date();
 
@@ -70,6 +77,7 @@ rentalSchema.methods.return = function() {
   this.rentalFee = rentalDays * this.movie.dailyRentalRate;
 }
 
+// creating the rental class from the created rental schema above
 const Rental = mongoose.model('Rental', rentalSchema);
 
 function validateRental(rental) {

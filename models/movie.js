@@ -1,7 +1,11 @@
+/*** This code defines the schema for movies */
+
+// loading the required modules
 const Joi = require('joi');
 const mongoose = require('mongoose');
 const {genreSchema} = require('./genre');
 
+// creating a class using the mongoose schema for a movie
 const Movie = mongoose.model('Movies', new mongoose.Schema({
   title: {
     type: String,

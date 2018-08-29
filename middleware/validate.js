@@ -1,3 +1,4 @@
+/*** This code validates the returns */
 
 module.exports = (validator) => {
   return (req, res, next) => {

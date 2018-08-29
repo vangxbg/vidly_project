@@ -1,8 +1,12 @@
+/*** This code defines the schema for a user who can log into the server */
+
+// load required modules here
 const config = require('config');
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const mongoose = require('mongoose');
 
+// instantiate a schema for our user Class
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -26,11 +30,13 @@ const userSchema = new mongoose.Schema({
   isAdmin: Boolean
 });
 
+// create a non static method that generates a token using our jwtPrivateKey defined in config document
 userSchema.methods.generateAuthToken = function() { 
   const token = jwt.sign({ _id: this._id, isAdmin: this.isAdmin }, config.get('jwtPrivateKey'));
   return token;
 }
 
+// creating our User class using our schema provided above
 const User = mongoose.model('User', userSchema);
 
 function validateUser(user) {

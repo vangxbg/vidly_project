@@ -1,18 +1,25 @@
+/*** This code handles the http requests for users */
+
+// loading required modules
 const auth = require('../middleware/auth');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const bcrypt = require('bcrypt');
-const _ = require('lodash');
+const _ = require('lodash'); // helps iterate through arrays
 const {User, validate} = require('../models/user');
 const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
 
+// request get /me to get my user accout
+// request response: returns the user account without the password
 router.get('/me', auth, async (req, res) => {
   const user = await User.findById(req.user._id).select('-password');
   res.send(user);
 });
 
+// post or creating a user account
+// post response: returns the header the x-auth-token and the token generated along with the id, name and email
 router.post('/', async (req, res) => {
   const { error } = validate(req.body); 
   if (error) return res.status(400).send(error.details[0].message);

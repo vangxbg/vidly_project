@@ -1,6 +1,10 @@
+/*** This code defines the schema for a customer */
+
+// loading required modules
 const Joi = require('joi');
 const mongoose = require('mongoose');
 
+// creating a Class for customer given a certain mongoose schema
 const Customer = mongoose.model('Customer', new mongoose.Schema({
   name: {
     type: String,

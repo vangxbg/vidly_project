@@ -1,3 +1,4 @@
+/*** This code checks if the user as admin property */
 
 module.exports = function (req, res, next) { 
   // 401 Unauthorized
