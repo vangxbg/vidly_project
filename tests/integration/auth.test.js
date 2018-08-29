@@ -1,9 +1,13 @@
+/*** this code tests the auth middleware */
+
 const {User} = require('../../models/user');
 const {Genre} = require('../../models/genre');
 const request = require('supertest');
 
 describe('auth middleware', () => {
+  // before each test create a server
   beforeEach(() => { server = require('../../index'); })
+  // at the end of each test clear out Genre and close the server
   afterEach(async () => { 
     await Genre.remove({});
     await server.close(); 
@@ -11,6 +15,7 @@ describe('auth middleware', () => {
 
   let token; 
 
+  // this executes a post to genres with the correct header and token and sets name to genre 1
   const exec = () => {
     return request(server)
       .post('/api/genres')
@@ -18,6 +23,7 @@ describe('auth middleware', () => {
       .send({ name: 'genre1' });
   }
 
+  // generate a new token each time a test is run
   beforeEach(() => {
     token = new User().generateAuthToken();
   });

@@ -1,3 +1,6 @@
+/*** code authenticates the user */
+
+// load required modules
 const Joi = require('joi');
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
@@ -6,6 +9,8 @@ const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
 
+// takes in an email and password and generates the token
+// post response: sends the token back
 router.post('/', async (req, res) => {
   const { error } = validate(req.body); 
   if (error) return res.status(400).send(error.details[0].message);

@@ -1,3 +1,5 @@
+/*** This class tests the returns http requests */
+
 const moment = require('moment');
 const request = require('supertest');
 const {Rental} = require('../../models/rental');

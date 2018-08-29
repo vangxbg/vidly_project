@@ -1,3 +1,6 @@
+/*** This code tests the genres http reqests */
+
+// load the required modules
 const request = require('supertest');
 const {Genre} = require('../../models/genre');
 const {User} = require('../../models/user');
@@ -6,7 +9,9 @@ const mongoose = require('mongoose');
 let server;
 
 describe('/api/genres', () => {
+  // load up the server before each test
   beforeEach(() => { server = require('../../index'); })
+  // close up the server after each test and also clear on the genre
   afterEach(async () => { 
     await server.close(); 
     await Genre.remove({});
